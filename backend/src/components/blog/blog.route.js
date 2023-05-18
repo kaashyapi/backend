@@ -15,4 +15,6 @@ blogRoutes.delete("/blog/:id", auth.auth, blogController.deleteBlog);
 
 blogRoutes.patch("/blog/:id", auth.auth, blogController.updateBlog);
 
+blogRoutes.get("/blogtitle", blogController.getBlogTitle)
+
 module.exports = blogRoutes;

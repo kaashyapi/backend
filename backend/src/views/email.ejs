@@ -16,10 +16,10 @@
         <h1 style="color: #00b8d4;">TechForum</h1>
         <hr>
         <h2>Password Reset</h2>
-        <h4>Hello {{name}} </h4>
-        <p>We have recived a request to reset the password for the emailId: {{emailId}}.</p>
+        <h4>Hello <%= name %></h4>
+        <p>We have received a request to reset the password for the emailId: <%= emailId %>.</p>
         <p>You can reset your password by clicking the link below:</p>
-        <a href="{{link}}">
+        <a href="<%= link %>">
             <button style="
             background-color: #00b8d4;
             color: white;
@@ -27,7 +27,7 @@
             padding: 10px;
             border-radius: 20px;
             font-size: 16px;">Reset your password</button></a>
-        <p>If you didn't request for reset password, please let us know immediately by replying to this email</p>
+        <p>If you didn't request for a password reset, please let us know immediately by replying to this email.</p>
         <p>-TechForum team</p>
     </div>
 </body>

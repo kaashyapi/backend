@@ -30,13 +30,55 @@ exports.createQuestion = async (req, res) => {
   }
 };
 
-// read the question from database
+// question pagination
+exports.questionPagination = async (req, res) => {
+  try {
+    let page = parseInt(req.query.page) || 1;
+    let limit = parseInt(req.query.limit) || 8;
+    let skip = (page - 1) * limit;
+
+    const questionsData = await Question.find()
+      .skip(skip)
+      .limit(limit)
+      .populate([
+        {
+          path: "userId",
+        },
+      ]);
+    const count = await Question.countDocuments();
+    const totalPages = Math.ceil(count / limit);
+    const hasMore = page < totalPages;
+
+    if (!questionsData) {
+      return res.status(404).json({
+        status: 404,
+        message: "Data Not Found",
+      });
+    } else {
+      res.status(200).json({
+        status: 200,
+        message: "Questions Readed successfully",
+        data: questionsData,
+        nbHits: questionsData.length,
+        totalPages: totalPages,
+        hasMore,
+      });
+    }
+  } catch (err) {
+    return res.status(500).json({
+      status: 500,
+      message: "Server Error",
+    });
+  }
+};
+
+// read the questions from database
 exports.readQuestions = async (req, res) => {
   try {
     const questionsData = await Question.find().populate([
       {
-        path: "userId"
-      }
+        path: "userId",
+      },
     ]);
     if (!questionsData) {
       return res.status(404).json({
@@ -57,7 +99,6 @@ exports.readQuestions = async (req, res) => {
     });
   }
 };
-
 // get a speific question by question id
 exports.readByIdQuestion = async (req, res) => {
   try {
@@ -152,8 +193,8 @@ exports.deleteQuestion = async (req, res) => {
   try {
     const id = req.params.id;
     await Question.findByIdAndDelete(id);
-    await Bookmark.deleteMany({questionId:id});
-    await Answer.deleteMany({questionId:id});
+    await Bookmark.deleteMany({ questionId: id });
+    await Answer.deleteMany({ questionId: id });
     res.status(200).json({
       status: 200,
       message: "Question Deleted Successfully",

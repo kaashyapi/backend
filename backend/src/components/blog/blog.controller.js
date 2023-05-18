@@ -139,6 +139,24 @@ exports.getBlog = async (req, res) => {
   }
 };
 
+exports.getBlogTitle = async (req,res) =>{
+  try {
+    const projection = {title:1}
+    const blogsd = await Blog.find({isApproved:true}, projection).exec()
+    const blogsData = blogsd.map((btitle) => ({
+      title: btitle.title,
+    }));
+    return res.status(201).json({ blogs: blogsData });
+  } catch (err) {
+    return res.status(500).json({
+      status: 500,
+      message: "Server Error",
+    });
+  }
+};
+
+
+
 //delete an existing blog
 exports.deleteBlog = async (req, res) => {
   try {

@@ -5,7 +5,5 @@ const auth = require('../../middleware/auth')
 
 bookmarkRoutes.post('/bookmark', auth.auth, bookmarkController.addBookmark)
 bookmarkRoutes.get('/bookmark/:userId', auth.auth, bookmarkController.getBookmarkByUserId)
-bookmarkRoutes.post('/bookmark', bookmarkController.addBookmark)
-bookmarkRoutes.get('/bookmark/:userId', bookmarkController.getBookmarkByUserId)
-
+bookmarkRoutes.get('/managebookmark/:userId', auth.auth, bookmarkController.getmanageBookmarkById)
 module.exports = bookmarkRoutes

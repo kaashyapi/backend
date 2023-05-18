@@ -29,7 +29,8 @@ const questionSchema = new mongoose.Schema({
    default: Date.now,
  },
  updatedAt: {
-   type: Date
+   type: Date,
+   default: Date.now,
  },
 });
 

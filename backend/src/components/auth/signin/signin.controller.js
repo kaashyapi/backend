@@ -28,6 +28,8 @@ module.exports = {
               httpOnly: true,
               path: "/users",
               expires: expirationTime,
+              sameSite: "none",
+              secure: true,
             })
             .status(200)
             .json({
