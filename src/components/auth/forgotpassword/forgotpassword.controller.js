@@ -1,8 +1,6 @@
 const User = require("../../../models/user");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const ejs = require("ejs");
-const path = require("path");
 require("dotenv").config();
 
 module.exports = {
