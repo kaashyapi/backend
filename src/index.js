@@ -10,16 +10,19 @@ connectToDatabase();
 
 const PORT = process.env.port;
 const corsOptions = {
-  origin: "https://master--tech-forum.netlify.app",
-  methods: ['GET','PATCH','POST','DELETE'],
+  origin: "https://main--techforum.netlify.app",
+  methods: ["GET", "PATCH", "POST", "DELETE"],
   withCredentials: true,
   credentials: true,
   optionSuccessStatus: 200,
-  allowedHeaders:['Content-Type','Authorization']
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 const allowCrossDomain = (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://master--tech-forum.netlify.app");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://main--techforum.netlify.app"
+  );
   res.header("Access-Control-Allow-Methods", "GET,PATCH,POST,DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Credentials", true);
@@ -35,7 +38,7 @@ app.use(cors(corsOptions));
 app.options(
   "*",
   cors({
-    origin: "https://master--tech-forum.netlify.app",
+    origin: "https://main--techforum.netlify.app",
     credentials: true,
   })
 );
