@@ -8,10 +8,10 @@ const path = require("path");
 
 const connectToDatabase = require("./config");
 connectToDatabase();
-app.use(express.static(path.join(__dirname, "frontend/dist/frontend")));
+app.use(express.static(path.join(__dirname, "/dist/frontend")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist/frontend/index.html"));
+  res.sendFile(path.join(__dirname, "/dist/frontend/index.html"));
 });
 const PORT = process.env.port;
 const corsOptions = {
