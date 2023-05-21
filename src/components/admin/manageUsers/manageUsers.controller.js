@@ -4,7 +4,6 @@ const Answer = require("../../../models/answer");
 const Question = require("../../../models/question");
 const Blog = require("../../../models/blog");
 const Doc = require("../../../models/doc");
-const user = require("../../../models/user");
 
 module.exports = {
   getAllUsers: async (req, res) => {
