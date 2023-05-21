@@ -8,11 +8,7 @@ const path = require("path");
 
 const connectToDatabase = require("./config");
 connectToDatabase();
-app.use(express.static(path.join(__dirname, "/dist/frontend")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/dist/frontend/index.html"));
-});
 const PORT = process.env.port;
 const corsOptions = {
   origin: "https://main--techforum.netlify.app",
@@ -35,6 +31,12 @@ const allowCrossDomain = (req, res, next) => {
 };
 app.use(allowCrossDomain);
 app.use(cors({ origin: true }));
+app.use(express.static(path.join(__dirname, "frontend/dist/frontend")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/dist/frontend/index.html"));
+});
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
