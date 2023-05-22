@@ -4,19 +4,11 @@ const route = require("./route");
 const cors = require("cors");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
-const path = require("path")
 const connectToDatabase = require("./config");
 connectToDatabase();
 
 const PORT = process.env.port;
-const angularAppPath = process.env.angularAppPath;
-const distPath = path.join(angularAppPath, 'dist')
-const indexFilePath = path.join(distPath, 'index.html')
-app.use("/frontend", express.static(distPath));
 
-app.get("*", (req, res) => {
-  res.sendFile(indexFilePath);
-});
 const corsOptions = {
   origin: "https://main--techforum.netlify.app",
   methods: ["GET", "PATCH", "POST", "DELETE"],
