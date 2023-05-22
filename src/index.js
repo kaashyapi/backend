@@ -31,11 +31,11 @@ const allowCrossDomain = (req, res, next) => {
 };
 app.use(allowCrossDomain);
 app.use(cors({ origin: true }));
-app.use(express.static(path.join(__dirname, "frontend/dist/frontend")));
+// app.use(express.static(path.join(__dirname, "frontend/dist/frontend")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist/frontend/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "frontend/dist/frontend/index.html"));
+// });
 
 app.use(cookieParser());
 app.use(express.json());
