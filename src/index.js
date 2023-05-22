@@ -4,12 +4,17 @@ const route = require("./route");
 const cors = require("cors");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
-const path = require("path");
 
 const connectToDatabase = require("./config");
 connectToDatabase();
 
 const PORT = process.env.port;
+const angularAppPath = process.env.angularAppPath;
+app.use("/frontend", express.static(`${angularAppPath}/dist/frontend`));
+
+app.get("*", (req, res) => {
+  res.sendFile(`${angularAppPath}/dist/frontend/index.html`);
+});
 const corsOptions = {
   origin: "https://main--techforum.netlify.app",
   methods: ["GET", "PATCH", "POST", "DELETE"],
@@ -31,11 +36,6 @@ const allowCrossDomain = (req, res, next) => {
 };
 app.use(allowCrossDomain);
 app.use(cors({ origin: true }));
-// app.use(express.static(path.join(__dirname, "frontend/dist/frontend")));
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "frontend/dist/frontend/index.html"));
-// });
 
 app.use(cookieParser());
 app.use(express.json());
