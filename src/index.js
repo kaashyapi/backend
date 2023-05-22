@@ -10,11 +10,12 @@ connectToDatabase();
 
 const PORT = process.env.port;
 const angularAppPath = process.env.angularAppPath;
-const absolutePath = path.resolve(__dirname, angularAppPath, 'dist/frontend')
-app.use("/frontend", express.static(absolutePath));
+const distPath = path.join(angularAppPath, 'dist')
+const indexFilePath = path.join(distPath, 'index.html')
+app.use("/frontend", express.static(distPath));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(absolutePath, 'index.html'));
+  res.sendFile(indexFilePath);
 });
 const corsOptions = {
   origin: "https://main--techforum.netlify.app",
