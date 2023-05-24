@@ -60,7 +60,7 @@ module.exports = {
                 color: white;
                 width: 250px;
                 padding: 10px;
-                border-radius: 20px;
+                border-radius: 20px; cursor: pointer;
                 font-size: 16px;">Reset your password</button></a>
             <p>If you didn't request for a password reset, please let us know immediately by replying to this email.</p>
             <p>-TechForum team</p>
