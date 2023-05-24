@@ -86,11 +86,13 @@ exports.blog = async (req, res) => {
 //post a new blog
 exports.createBlog = async (req, res) => {
   const { title, content } = req.body;
+  const createdDate = Date.now();
   const userId = req.userId;
   const blog = new Blog({
     userId,
     title,
     content,
+    createdDate,
   });
   try {
     Blog;
@@ -139,10 +141,10 @@ exports.getBlog = async (req, res) => {
   }
 };
 
-exports.getBlogTitle = async (req,res) =>{
+exports.getBlogTitle = async (req, res) => {
   try {
-    const projection = {title:1}
-    const blogsd = await Blog.find({isApproved:true}, projection).exec()
+    const projection = { title: 1 };
+    const blogsd = await Blog.find({ isApproved: true }, projection).exec();
     const blogsData = blogsd.map((btitle) => ({
       title: btitle.title,
     }));
@@ -154,8 +156,6 @@ exports.getBlogTitle = async (req,res) =>{
     });
   }
 };
-
-
 
 //delete an existing blog
 exports.deleteBlog = async (req, res) => {
@@ -186,9 +186,14 @@ exports.updateBlog = async (req, res) => {
   try {
     const id = req.params.id;
     const update = req.body;
-    const updateblog = await Blog.findByIdAndUpdate(id, update, {
-      new: true,
-    });
+    const updatedDate = Date.now();
+    const updateblog = await Blog.findByIdAndUpdate(
+      id,
+      { ...update, updatedDate: updatedDate },
+      {
+        new: true,
+      }
+    );
 
     if (!updateblog) {
       res.status(404).json({
