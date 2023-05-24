@@ -18,13 +18,13 @@ const answerSchema = new mongoose.Schema({
   },
 
   upvotes: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user"}],
-    unique:true
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    unique: true,
   },
 
   downvotes: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user"}],
-    unique: true
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    unique: true,
   },
 
   createdAt: {
@@ -34,7 +34,6 @@ const answerSchema = new mongoose.Schema({
 
   updatedAt: {
     type: Date,
-    default: Date.now,
   },
 });
 

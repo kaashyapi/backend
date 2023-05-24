@@ -1,13 +1,11 @@
 const Bookmark = require("../../models/bookmark");
 
-
 module.exports = {
   addBookmark: async (req, res) => {
     try {
       const userId = await req.body.userId;
       const questionId = req.body.questionId;
       const addedBookmark = await Bookmark.findOne({ userId, questionId });
-      console.log("Find Bookmark: ", addedBookmark);
       if (addedBookmark) {
         await Bookmark.findByIdAndDelete(addedBookmark._id);
         res.status(200).json({
@@ -31,18 +29,17 @@ module.exports = {
     }
   },
 
- 
   getmanageBookmarkById: async (req, res) => {
     try {
       const userId = req.params.userId;
-      const bookmarks = await Bookmark.find({ userId }).populate([ 
+      const bookmarks = await Bookmark.find({ userId }).populate([
         {
-           path: "questionId",
-                  populate: {
-                    path: "userId",
-                    model: "user",
-                  },
-        }, 
+          path: "questionId",
+          populate: {
+            path: "userId",
+            model: "user",
+          },
+        },
       ]);
       res.status(200).json({
         status: 200,
@@ -60,7 +57,7 @@ module.exports = {
   getBookmarkByUserId: async (req, res) => {
     try {
       const userId = req.params.userId;
-      const bookmarks = await Bookmark.find({ userId })
+      const bookmarks = await Bookmark.find({ userId });
       res.status(200).json({
         status: 200,
         message: "Bookmarks",
@@ -73,6 +70,4 @@ module.exports = {
       });
     }
   },
-}
-
-
+};
